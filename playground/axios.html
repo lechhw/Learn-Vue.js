@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axios</title>
+</head>
+
+<body>
+  <div id="app">
+    <button @click="getData">get user</button>
+    <div>{{users}}</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        users: []
+      },
+      methods: {
+        getData: function () {
+          var vm = this
+          axios.get('https://jsonplaceholder.typicode.com/users/').then(function (res) {
+            // 여기서 this 는 vue 가 아니고 window 이기 때문에 data 의 users 에 값이 안들어간다.
+            // 그래서 then 함수 밖에서 따로 변수에 vue 를 담아 거기에 res.data 를 담아서 전달한다.
+            // console.log(this);
+            console.log(res.data);
+            vm.users = res.data
+          }).catch(function (err) {
+            console.log(err);
+          })
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
