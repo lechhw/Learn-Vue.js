@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Computed usage</title>
+</head>
+<style>
+  .warning {
+    color: red;
+  }
+
+</style>
+
+<body>
+  <div id="app">
+    <!-- 템플릿 표현식으로 클래스 바인딩 -->
+    <!-- <p :class="{warning: isError}">Hello</p> -->
+
+    <!-- computed 로 클래스 바인딩 -->
+    <p :class="errorTextColor">Hello</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          isError: false,
+        };
+      },
+      computed: {
+        errorTextColor() {
+          return this.isError ? 'warning' : null
+        },
+
+      },
+    })
+  </script>
+</body>
+
+</html>
